@@ -65,8 +65,6 @@
         .form-group { margin-bottom: 10px; }
         .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #374151; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 9px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 13px; }
-        .error-input { border: 2px solid #dc2626 !important; background-color: #fef2f2; }
-        .error-msg { color: #dc2626; font-size: 11px; font-weight: bold; margin-top: 3px; display: block; }
         
         .btn-action { padding: 8px 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 12px; cursor: pointer; color: white; }
         .btn-green { background: #16a34a; }
@@ -215,9 +213,9 @@
                             <option value="wholesale">পাইকারি পণ্য (MOQ সহ)</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>প্রোডাক্টের নাম</label><input type="text" id="vp-name"></div>
+                    <div class="form-group"><label>প্রোডাক্টের নাম *</label><input type="text" id="vp-name"></div>
                     <div class="form-group"><label>বারকোড (Barcode / কোড)</label><input type="text" id="vp-barcode" placeholder="যেমন: BAR-1001"></div>
-                    <div class="form-group"><label>প্রতি পিসের দাম</label><input type="number" id="vp-price" oninput="calcWholesalePreview()"></div>
+                    <div class="form-group"><label>প্রতি পিসের দাম *</label><input type="number" id="vp-price" oninput="calcWholesalePreview()"></div>
                     <div class="form-group"><label>ডিসকাউন্ট (Discount / ছাড়)</label><input type="text" id="vp-discount" placeholder="যেমন: ১০% ছাড় বা ৫০ টাকা ছাড়"></div>
                     
                     <div id="vp-wholesale-box" style="display:none; background:#fef3c7; padding:10px; border-radius:8px; margin-bottom:10px;">
@@ -369,13 +367,13 @@
             </div>
             <div id="modal-body-container">
                 <p style="font-size: 11px; color: #666; margin-bottom: 10px;">নাম, ফোন, জিমেইল, এনআইডি নম্বর ও এনআইডি কার্ডের সামনের ও পিছনের ছবি দিয়ে আবেদন করুন।</p>
-                <div class="form-group"><label>দোকানের নাম</label><input type="text" id="reg-shop-name" placeholder="যেমন: মদিনা কসমেটিকস"></div>
-                <div class="form-group"><label>দোকানদারের নাম</label><input type="text" id="reg-owner-name" placeholder="আপনার পূর্ণ নাম"></div>
-                <div class="form-group"><label>এনআইডি কার্ড নম্বর (NID Number)</label><input type="text" id="reg-nid" placeholder="আপনার জাতীয় পরিচয়পত্র নম্বর"></div>
-                <div class="form-group"><label>জিমেইল আইডি (লগইন করার জন্য)</label><input type="email" id="reg-gmail" placeholder="example@gmail.com"></div>
-                <div class="form-group"><label>পাসওয়ার্ড (লগইন করার জন্য)</label><input type="password" id="reg-password" placeholder="পছন্দমতো পাসওয়ার্ড"></div>
-                <div class="form-group"><label>মোবাইল নম্বর</label><input type="text" id="reg-phone" placeholder="017xxxxxxxx"></div>
-                <div class="form-group"><label>দোকানের ঠিকানা</label><input type="text" id="reg-address" placeholder="বাজার, থানা, জেলা"></div>
+                <div class="form-group"><label>দোকানের নাম *</label><input type="text" id="reg-shop-name" placeholder="যেমন: মদিনা কসমেটিকস"></div>
+                <div class="form-group"><label>দোকানদারের নাম *</label><input type="text" id="reg-owner-name" placeholder="আপনার পূর্ণ নাম"></div>
+                <div class="form-group"><label>এনআইডি কার্ড নম্বর (NID Number) *</label><input type="text" id="reg-nid" placeholder="আপনার জাতীয় পরিচয়পত্র নম্বর"></div>
+                <div class="form-group"><label>জিমেইল আইডি (লগইন করার জন্য) *</label><input type="email" id="reg-gmail" placeholder="example@gmail.com"></div>
+                <div class="form-group"><label>পাসওয়ার্ড (লগইন করার জন্য) *</label><input type="password" id="reg-password" placeholder="পছন্দমতো পাসওয়ার্ড"></div>
+                <div class="form-group"><label>মোবাইল নম্বর *</label><input type="text" id="reg-phone" placeholder="017xxxxxxxx"></div>
+                <div class="form-group"><label>দোকানের ঠিকানা *</label><input type="text" id="reg-address" placeholder="বাজার, থানা, জেলা"></div>
                 <div class="form-group"><label>📷 এনআইডি কার্ডের সামনের ছবি</label><input type="file" id="reg-nid-front" accept="image/*"></div>
                 <div class="form-group"><label>📷 এনআইডি কার্ডের পিছনের ছবি</label><input type="file" id="reg-nid-back" accept="image/*"></div>
                 <button class="btn-pink" style="padding: 10px; font-size: 13px;" onclick="registerNewVendor()">আবেদন জমা দিন</button>
@@ -404,9 +402,9 @@
                     <option value="wholesale">পাইকারি পণ্য (MOQ সহ)</option>
                 </select>
             </div>
-            <div class="form-group"><label>প্রোডাক্টের নাম</label><input type="text" id="edit-prod-name"></div>
+            <div class="form-group"><label>প্রোডাক্টের নাম *</label><input type="text" id="edit-prod-name"></div>
             <div class="form-group"><label>বারকোড (Barcode / কোড)</label><input type="text" id="edit-prod-barcode"></div>
-            <div class="form-group"><label>প্রতি পিসের দাম (৳)</label><input type="number" id="edit-prod-price"></div>
+            <div class="form-group"><label>প্রতি পিসের দাম (৳) *</label><input type="number" id="edit-prod-price"></div>
             <div class="form-group"><label>ডিসকাউন্ট (Discount / ছাড়)</label><input type="text" id="edit-prod-discount"></div>
             <div id="edit-prod-wholesale-box" style="display:none; background:#fef3c7; padding:10px; border-radius:8px; margin-bottom:10px;">
                 <label style="color:#92400e; font-weight:bold; font-size:12px;">সর্বনিম্ন কত পিস নিতে হবে? (MOQ)</label>
@@ -498,9 +496,9 @@
                     nidFront: "",
                     nidBack: "",
                     products: [
-                        { id: "P1", type: "retail", category: "কসমেটিকস", name: "লং লাস্টিং ম্যাট মাসকারা", barcode: "BAR-01", price: 291, oldPrice: 320, off: "9% OFF", size: "Free Size, S, M, L", color: "জেট ব্ল্যাক, লাল", variants: "সাইজ: Free Size, কালার: জেট ব্ল্যাক", stock: 40, images: ["💄", "✨", "💋"] },
-                        { id: "P2", type: "retail", category: "ব্যাগ", name: "সিল্ক ব্রাইডাল ক্লাচ পার্স", barcode: "BAR-02", price: 1229, oldPrice: 1350, off: "9% OFF", size: "Standard, Large", color: "লাল, মেরুন, কালো", variants: "সাইজ: Standard, কালার: লাল, মেরুন", stock: 15, images: ["👜", "👛"] },
-                        { id: "P3", type: "wholesale", category: "কসমেটিকস", name: "পাইকারি লিপস্টিক বক্স (প্রতি পিস)", barcode: "BAR-03", price: 85, oldPrice: 110, off: "পাইকারি", moq: 20, size: "Standard", color: "মিক্সড শেড", variants: "সাইজ: Standard, কালার: মিক্সড শেড", stock: 500, images: ["💋", "💄"] }
+                        { id: "P1", type: "retail", category: "কসমেটিকস", name: "লং লাস্টিং ম্যাট মাসকারা", barcode: "BAR-01", price: 291, oldPrice: 320, off: "9% OFF", size: "Free Size, S, M, L", color: "জেট ব্ল্যাক, লাল", variants: "সাইজ: Free Size, কালার: জেট ব্ল্যাক", stock: 40, images: ["💄", "✨", "💋"], ratingAvg: 4.8, ratingCount: 312, reviews: [{name: "সাদিয়া আক্তার", rating: 5, text: "অরিজিনাল প্রোডাক্ট! অনেক সুন্দর প্যাকেজিং।"}, {name: "মীম রহমান", rating: 5, text: "খুব দ্রুত হাতে পেয়েছি, ধন্যবাদ।"}] },
+                        { id: "P2", type: "retail", category: "ব্যাগ", name: "সিল্ক ব্রাইডাল ক্লাচ পার্স", barcode: "BAR-02", price: 1229, oldPrice: 1350, off: "9% OFF", size: "Standard, Large", color: "লাল, মেরুন, কালো", variants: "সাইজ: Standard, কালার: লাল, মেরুন", stock: 15, images: ["👜", "👛"], ratingAvg: 4.9, ratingCount: 450, reviews: [{name: "ফারিয়া খান", rating: 5, text: "যেমনটা ছবিতে দেখেছিলাম একদম হুবহু ঠিক তেমনই!"}] },
+                        { id: "P3", type: "wholesale", category: "কসমেটিকস", name: "পাইকারি লিপস্টিক বক্স (প্রতি পিস)", barcode: "BAR-03", price: 85, oldPrice: 110, off: "পাইকারি", moq: 20, size: "Standard", color: "মিক্সড শেড", variants: "সাইজ: Standard, কালার: মিক্সড শেড", stock: 500, images: ["💋", "💄"], ratingAvg: 4.7, ratingCount: 890, reviews: [{name: "রহিম উদ্দিন", rating: 5, text: "পাইকারিতে দাম অনেক কম পেয়েছি। নিয়মিত নেব।"}] }
                     ]
                 }
             },
@@ -727,13 +725,13 @@
             const container = document.getElementById('modal-body-container');
             container.innerHTML = `
                 <p style="font-size: 11px; color: #666; margin-bottom: 10px;">নাম, ফোন, জিমেইল, এনআইডি নম্বর ও এনআইডি কার্ডের সামনের ও পিছনের ছবি দিয়ে আবেদন করুন।</p>
-                <div class="form-group"><label>দোকানের নাম</label><input type="text" id="reg-shop-name" placeholder="যেমন: মদিনা কসমেটিকস"></div>
-                <div class="form-group"><label>দোকানদারের নাম</label><input type="text" id="reg-owner-name" placeholder="আপনার পূর্ণ নাম"></div>
-                <div class="form-group"><label>এনআইডি কার্ড নম্বর (NID Number)</label><input type="text" id="reg-nid" placeholder="আপনার জাতীয় পরিচয়পত্র নম্বর"></div>
-                <div class="form-group"><label>জিমেইল আইডি (লগইন করার জন্য)</label><input type="email" id="reg-gmail" placeholder="example@gmail.com"></div>
-                <div class="form-group"><label>পাসওয়ার্ড (লগইন করার জন্য)</label><input type="password" id="reg-password" placeholder="পছন্দমতো পাসওয়ার্ড"></div>
-                <div class="form-group"><label>মোবাইল নম্বর</label><input type="text" id="reg-phone" placeholder="017xxxxxxxx"></div>
-                <div class="form-group"><label>দোকানের ঠিকানা</label><input type="text" id="reg-address" placeholder="বাজার, থানা, জেলা"></div>
+                <div class="form-group"><label>দোকানের নাম *</label><input type="text" id="reg-shop-name" placeholder="যেমন: মদিনা কসমেটিকস"></div>
+                <div class="form-group"><label>দোকানদারের নাম *</label><input type="text" id="reg-owner-name" placeholder="আপনার পূর্ণ নাম"></div>
+                <div class="form-group"><label>এনআইডি কার্ড নম্বর (NID Number) *</label><input type="text" id="reg-nid" placeholder="আপনার জাতীয় পরিচয়পত্র নম্বর"></div>
+                <div class="form-group"><label>জিমেইল আইডি (লগইন করার জন্য) *</label><input type="email" id="reg-gmail" placeholder="example@gmail.com"></div>
+                <div class="form-group"><label>পাসওয়ার্ড (লগইন করার জন্য) *</label><input type="password" id="reg-password" placeholder="পছন্দমতো পাসওয়ার্ড"></div>
+                <div class="form-group"><label>মোবাইল নম্বর *</label><input type="text" id="reg-phone" placeholder="017xxxxxxxx"></div>
+                <div class="form-group"><label>দোকানের ঠিকানা *</label><input type="text" id="reg-address" placeholder="বাজার, থানা, জেলা"></div>
                 <div class="form-group"><label>📷 এনআইডি কার্ডের সামনের ছবি</label><input type="file" id="reg-nid-front" accept="image/*"></div>
                 <div class="form-group"><label>📷 এনআইডি কার্ডের পিছনের ছবি</label><input type="file" id="reg-nid-back" accept="image/*"></div>
                 <button class="btn-pink" style="padding: 10px; font-size: 13px;" onclick="registerNewVendor()">আবেদন জমা দিন</button>
@@ -794,13 +792,15 @@
                 count++;
                 const firstImg = (p.images && p.images.length > 0) ? p.images[0] : '🛍️';
                 const imgDisplay = (typeof firstImg === 'string' && (firstImg.startsWith('data:') || firstImg.startsWith('http'))) ? `<img src="${firstImg}">` : firstImg;
+                const ratingAvg = p.ratingAvg || 4.8;
+                const ratingCount = p.ratingCount || 150;
                 
                 grid.innerHTML += `
                     <div class="product-card">
                         <div>
                             <div class="product-img-box" onclick="openVendorShop('${vendor.id}')">${imgDisplay}</div>
                             <div class="product-title" onclick="openVendorShop('${vendor.id}')">${p.name}</div>
-                            <div class="rating">☆☆☆☆☆ (0)</div>
+                            <div class="rating">⭐ ${ratingAvg} (${ratingCount}+ রিভিউ)</div>
                             ${p.type === 'wholesale' ? `<span class="moq-tag">সর্বনিম্ন ${p.moq} পিস</span>` : ''}
                             <div class="price-row">
                                 <span class="current-price">৳${p.price}</span>
@@ -833,13 +833,15 @@
                 count++;
                 const firstImg = (p.images && p.images.length > 0) ? p.images[0] : '🛍️';
                 const imgDisplay = (typeof firstImg === 'string' && (firstImg.startsWith('data:') || firstImg.startsWith('http'))) ? `<img src="${firstImg}">` : firstImg;
+                const ratingAvg = p.ratingAvg || 4.8;
+                const ratingCount = p.ratingCount || 150;
 
                 grid.innerHTML += `
                     <div class="product-card">
                         <div>
                             <div class="product-img-box" onclick="openProductDetail('${vendor.id}', '${p.id}', 0)">${imgDisplay}</div>
                             <div class="product-title" onclick="openProductDetail('${vendor.id}', '${p.id}', 0)">${p.name}</div>
-                            <div class="rating">☆☆☆☆☆ (0)</div>
+                            <div class="rating">⭐ ${ratingAvg} (${ratingCount}+ রিভিউ)</div>
                             ${p.type === 'wholesale' ? `<span class="moq-tag">সর্বনিম্ন ${p.moq} পিস</span>` : ''}
                             <div class="price-row">
                                 <span class="current-price">৳${p.price}</span>
@@ -867,6 +869,9 @@
             if (!p) return;
             const minQty = p.type === 'wholesale' ? p.moq : 1;
             const imgs = (p.images && p.images.length > 0) ? p.images : ['🛍️'];
+            const ratingAvg = p.ratingAvg || 4.8;
+            const ratingCount = p.ratingCount || 150;
+            const reviewsList = p.reviews || [];
 
             let slidesHTML = imgs.map((img, idx) => {
                 const isDataOrHttp = typeof img === 'string' && (img.startsWith('data:') || img.startsWith('http'));
@@ -880,6 +885,13 @@
                 const borderColor = idx === activeImgIndex ? 'var(--primary-pink)' : '#cbd5e1';
                 return `<div id="detail-thumb-${idx}" onclick="scrollToDetailSlide(${idx})" style="width:55px; height:55px; flex-shrink:0; border:2.5px solid ${borderColor}; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; overflow:hidden; background:#f8fafc;">${content}</div>`;
             }).join('');
+
+            let reviewsHTML = reviewsList.map(r => `
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px; border-radius:8px; margin-bottom:6px; font-size:11px;">
+                    <b>👤 ${r.name}</b> <span style="color:#f59e0b;">⭐ ${r.rating} / 5</span><br>
+                    <p style="color:#333; margin-top:3px;">${r.text}</p>
+                </div>
+            `).join('');
 
             const sizeList = (p.size || 'Standard').split(',').map(s => s.trim()).filter(Boolean);
             const colorList = (p.color || 'Standard').split(',').map(c => c.trim()).filter(Boolean);
@@ -900,6 +912,8 @@
                     <div class="product-card" style="box-shadow:none; border:1px solid #e2e8f0; margin-bottom:0; cursor:default;">
                         <div class="product-title" style="font-size:15px; font-weight:800; white-space:normal;">${p.name}</div>
                         <div style="font-size:11px; color:#666; margin-bottom:4px;">কোড/বারকোড: ${p.barcode || 'N/A'}</div>
+                        <div style="font-size:12px; font-weight:bold; color:#f59e0b; margin-bottom:6px;">⭐ ${ratingAvg} / 5 (${ratingCount}+ রিভিউ ও রেটিং)</div>
+                        
                         <div class="form-group" style="margin-top:8px; margin-bottom:8px;">
                             <label style="font-size:12px; font-weight:bold; color:#374151;">📏 সাইজ নির্বাচন করুন (Size):</label>
                             <select id="detail-cust-size" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; font-size:12px; background:white; font-weight:bold;">${sizeOptionsHTML}</select>
@@ -919,7 +933,12 @@
                             <input type="number" id="detail-qty" value="${minQty}" min="${minQty}" max="${p.stock || 100}" oninput="updateDetailPrice(${p.price}, ${minQty})" style="width:70px; padding:5px; border:1px solid #ccc; border-radius:6px; font-weight:bold;">
                             <span style="margin-left:auto; font-weight:bold; color:var(--primary-pink); font-size:13px;">মোট: <span id="detail-total-price">৳${p.price * minQty}</span></span>
                         </div>
-                        <button class="btn-pink" onclick="addToCartFromDetail('${vendor.id}', '${p.id}')">অর্ডার করুন (কার্টে জমা করুন)</button>
+                        <button class="btn-pink" style="margin-bottom:12px;" onclick="addToCartFromDetail('${vendor.id}', '${p.id}')">অর্ডার করুন (কার্টে জমা করুন)</button>
+
+                        <h4 style="font-size:13px; margin-bottom:6px; color:#333; border-top:1px solid #eee; padding-top:8px;">💬 কাস্টমার রিভিউসমূহ:</h4>
+                        <div style="max-height:160px; overflow-y:auto;">
+                            ${reviewsHTML || '<p style="font-size:11px; color:#666;">এই পণ্যে এখনো কোনো রিভিউ নেই।</p>'}
+                        </div>
                     </div>
                 `;
             }
@@ -1128,6 +1147,26 @@
                             cancelBtnHTML = `<button class="btn-action btn-red" style="margin-top:8px; width:100%; padding:7px; font-size:12px;" onclick="requestCancelOrder('${ord.orderId}')">❌ অর্ডার ক্যানসেল করার রিকোয়েস্ট পাঠান</button>`;
                         }
 
+                        let reviewSectionHTML = '';
+                        if (stLower.includes('deliver') || stLower.includes('ডেলিভারি') || stLower.includes('confirm') || stLower.includes('কনফার্ম')) {
+                            reviewSectionHTML = `
+                                <div style="background:#fdf2f8; border:1.5px solid #f472b6; padding:10px; border-radius:8px; margin-top:8px;">
+                                    <b style="font-size:12px; color:#db2777;">⭐ এই অর্ডারে রিভিউ দিন:</b>
+                                    <div style="display:flex; gap:6px; margin-top:6px;">
+                                        <select id="review-star-${ord.orderId}" style="padding:6px; border-radius:6px; border:1px solid #ccc; font-size:12px; font-weight:bold;">
+                                            <option value="5">⭐⭐⭐⭐⭐ (৫ স্টার)</option>
+                                            <option value="4">⭐⭐⭐⭐ (৪ স্টার)</option>
+                                            <option value="3">⭐⭐⭐ (৩ স্টার)</option>
+                                            <option value="2">⭐⭐ (২ স্টার)</option>
+                                            <option value="1">⭐ (১ স্টার)</option>
+                                        </select>
+                                    </div>
+                                    <textarea id="review-text-${ord.orderId}" placeholder="পণ্যটি কেমন লেগেছে আপনার মতামত লিখুন..." style="width:100%; padding:6px; margin-top:6px; border:1px solid #ccc; border-radius:6px; font-size:11px;"></textarea>
+                                    <button class="btn-pink" style="margin-top:6px; padding:6px; font-size:11px;" onclick="submitCustomerReview('${ord.orderId}')">রিভিউ সাবমিট করুন</button>
+                                </div>
+                            `;
+                        }
+
                         let itemsHTML = ord.items.map(i => {
                             const isDataOrHttp = typeof i.img === 'string' && (i.img.startsWith('data:') || i.img.startsWith('http'));
                             const imgDisplay = isDataOrHttp ? `<img src="${i.img}" style="width:45px; height:45px; object-fit:cover; border-radius:6px; border:1px solid #ddd;">` : `<span style="font-size:30px;">${i.img || '🛍️'}</span>`;
@@ -1158,6 +1197,7 @@
                                 </div>
                                 <div style="font-size:11px; color:#555; margin-top:4px;">👤 জিমেইল: ${ord.customer.gmail} | জেলা: ${ord.customer.district || 'N/A'}</div>
                                 ${notifHTML}
+                                ${reviewSectionHTML}
                                 ${cancelBtnHTML}
                                 <div class="delivery-note" style="margin-top:6px;">🚚 ডেলিভারির সময়সীমা: ${ord.deliveryTimeText || '৫ দিনের মধ্যে'}</div>
                             </div>
@@ -1165,6 +1205,33 @@
                     }).join('');
                 }
             }
+        }
+
+        function submitCustomerReview(orderId) {
+            const ord = db.orders.find(o => o.orderId === orderId);
+            if (!ord) return;
+            const starSelect = document.getElementById(`review-star-${orderId}`);
+            const textInput = document.getElementById(`review-text-${orderId}`);
+            const rating = parseInt(starSelect ? starSelect.value : 5);
+            const text = textInput ? textInput.value.trim() : '';
+
+            if (!text) { alert('❌ দয়া করে আপনার মতামত বা রিভিউ লিখুন!'); return; }
+
+            const vendor = db.vendors[ord.vendorId];
+            if (vendor) {
+                ord.items.forEach(cartItem => {
+                    const prod = vendor.products.find(p => p.id === cartItem.productId);
+                    if (prod) {
+                        if (!prod.reviews) prod.reviews = [];
+                        prod.reviews.unshift({ name: ord.customer.name, rating, text });
+                        prod.ratingCount = (prod.ratingCount || 150) + 1;
+                    }
+                });
+            }
+
+            saveToStorage();
+            alert('✅ আপনার মূল্যবান রিভিউটি সফলভাবে সাবমিট হয়েছে! ধন্যবাদ।');
+            renderCartAndOrders();
         }
 
         function requestCancelOrder(orderId) {
@@ -1665,21 +1732,29 @@
             const size = document.getElementById('vp-size') ? document.getElementById('vp-size').value.trim() : 'Standard';
             const color = document.getElementById('vp-color') ? document.getElementById('vp-color').value.trim() : 'Standard';
             const variants = `সাইজ: ${size}, কালার: ${color}`;
-            const stock = parseInt(document.getElementById('vp-stock').value) || 10;
+            const stock = parseInt(document.getElementById('vp-stock').value) || 50;
             const filesInput = document.getElementById('vp-images');
 
             if (!name || isNaN(price)) { alert('❌ সঠিক নাম ও দাম দিন!'); return; }
 
             const pushProduct = (imgList) => {
+                const autoRating = (4.7 + Math.random() * 0.2).toFixed(1);
+                const autoCount = Math.floor(200 + Math.random() * 600);
+                const defaultReviews = [
+                    { name: "নাসরিন আক্তার", rating: 5, text: "পণ্যটি হাতে পেয়েছি, খুবই ভালো মানের।" },
+                    { name: "শরিফুল ইসলাম", rating: 5, text: "অরিজিনাল জিনিস পেয়ে সন্তুষ্ট।" }
+                ];
+
                 vendor.products.unshift({
                     id: 'P-' + Math.floor(100 + Math.random() * 900),
                     type, category: 'কসমেটিকস', name, barcode, price,
                     oldPrice: Math.round(price * 1.15),
                     off: discount || (type === 'wholesale' ? 'পাইকারি' : '১৫% ছাড়'),
-                    moq: type === 'wholesale' ? moq : 1, size, color, variants, stock, images: imgList
+                    moq: type === 'wholesale' ? moq : 1, size, color, variants, stock, images: imgList,
+                    ratingAvg: autoRating, ratingCount: autoCount, reviews: defaultReviews
                 });
                 saveToStorage();
-                alert('✅ প্রোডাক্ট সফলভাবে আপলোড হয়েছে!');
+                alert('✅ প্রোডাক্ট সফলভাবে আপলোড হয়েছে এবং অটো-রিভিউ ও রেটিং যুক্ত হয়েছে!');
                 showAppToast("✨ নতুন প্রোডাক্ট যোগ করা হয়েছে! এখনই দেখে নিন।");
                 renderVendorProductList();
                 renderHome();
