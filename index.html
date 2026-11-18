@@ -65,6 +65,9 @@
         .form-group { margin-bottom: 10px; }
         .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #374151; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 9px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 13px; }
+        .error-input { border: 2px solid #dc2626 !important; background-color: #fef2f2; }
+        .error-msg { color: #dc2626; font-size: 11px; font-weight: bold; margin-top: 3px; display: block; }
+        
         .btn-action { padding: 8px 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 12px; cursor: pointer; color: white; }
         .btn-green { background: #16a34a; }
         .btn-blue { background: #2563eb; }
@@ -266,24 +269,44 @@
 
                 <div id="v-settings" class="v-sub-content card-box" style="display:none;">
                     <h4>⚙️ দোকান ও ডেলিভারি সেটিংস</h4>
+                    
                     <div style="background:#f8fafc; padding:10px; border-radius:8px; margin-top:8px; margin-bottom:10px; border:1px solid #e2e8f0;">
-                        <label style="font-size:12px; font-weight:bold;">💳 আপনার বিকাশ / নগদ পেমেন্ট নম্বর সেট করুন:</label>
-                        <div style="display:flex; gap:6px; margin-top:5px;">
-                            <input type="text" id="edit-vendor-bkash" placeholder="যেমন: 017xxxxxxxx (Personal)" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:6px;">
-                            <button class="btn-action btn-green" onclick="updateVendorBkash()">সেভ</button>
+                        <label style="font-size:12px; font-weight:bold;">💳 বিকাশ পেমেন্ট নম্বর:</label>
+                        <input type="text" id="edit-vendor-bkash" placeholder="যেমন: 017xxxxxxxx (Personal)" style="width:100%; padding:6px; margin-top:4px; border:1px solid #ccc; border-radius:6px; margin-bottom:8px;">
+                        
+                        <label style="font-size:12px; font-weight:bold;">💳 নগদ পেমেন্ট নম্বর:</label>
+                        <div style="display:flex; gap:6px; margin-top:4px;">
+                            <input type="text" id="edit-vendor-nagad" placeholder="যেমন: 018xxxxxxxx (Personal)" style="flex:1; padding:6px; border:1px solid #ccc; border-radius:6px;">
                         </div>
                     </div>
 
                     <div style="background:#f8fafc; padding:10px; border-radius:8px; margin-bottom:10px; border:1px solid #e2e8f0;">
-                        <label style="font-size:12px; font-weight:bold; color:#334155; margin-bottom:8px; display:block;">🚚 অনলাইন পেমেন্ট ডেলিভারি চার্জ:</label>
+                        <label style="font-size:12px; font-weight:bold; color:#334155; margin-bottom:8px; display:block;">🚚 ডেলিভারি অঞ্চল ও চার্জ সেটিংস:</label>
+                        
                         <div style="margin-bottom:8px;">
                             <label style="font-size:12px; font-weight:bold; color:#16a34a; display:flex; align-items:center; gap:6px; cursor:pointer;">
                                 <input type="checkbox" id="edit-vendor-free" style="width:16px; height:16px;" onchange="toggleVendorDeliveryMode()"> ফ্রি ডেলিভারি (Free Delivery)
                             </label>
                         </div>
-                        <div id="vendor-charge-input-box" class="form-group" style="margin-bottom:6px;">
-                            <label style="font-size:11px; font-weight:bold; color:#b45309;">ডেলিভারি চার্জের পরিমাণ লিখুন (যেমন: 20 বা 50):</label>
-                            <input type="text" id="edit-vendor-delivery-fee" placeholder="যেমন: 20" style="font-size:12px;">
+
+                        <div id="vendor-charge-input-box" style="space-y:8px;">
+                            <div style="background:white; padding:8px; border-radius:6px; border:1px solid #cbd5e1; margin-bottom:8px;">
+                                <label style="font-size:11px; font-weight:bold; color:#1e293b;">অঞ্চল ১ (যেমন: ঢাকার মধ্যে / পাবনার মধ্যে):</label>
+                                <input type="text" id="edit-area1-name" placeholder="অঞ্চলের নাম" style="font-size:12px; margin:4px 0 6px 0;">
+                                <div style="display:flex; gap:6px;">
+                                    <input type="text" id="edit-area1-fee" placeholder="চার্জ (টাকা)" style="font-size:12px; flex:1;">
+                                    <input type="text" id="edit-area1-time" placeholder="সময় (যেমন: ১-২ দিন)" style="font-size:12px; flex:1;">
+                                </div>
+                            </div>
+
+                            <div style="background:white; padding:8px; border-radius:6px; border:1px solid #cbd5e1; margin-bottom:6px;">
+                                <label style="font-size:11px; font-weight:bold; color:#1e293b;">অঞ্চল ২ (যেমন: ঢাকার বাইরে / পাবনার বাইরে):</label>
+                                <input type="text" id="edit-area2-name" placeholder="অঞ্চলের নাম" style="font-size:12px; margin:4px 0 6px 0;">
+                                <div style="display:flex; gap:6px;">
+                                    <input type="text" id="edit-area2-fee" placeholder="চার্জ (টাকা)" style="font-size:12px; flex:1;">
+                                    <input type="text" id="edit-area2-time" placeholder="সময় (যেমন: ৩-৫ দিন)" style="font-size:12px; flex:1;">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -461,8 +484,14 @@
                     password: "123",
                     phone: "01700000000",
                     bkash: "01700000000 (Personal)",
+                    nagad: "01800000000 (Personal)",
                     isFreeDelivery: false,
-                    deliveryFeeInfo: "20",
+                    area1Name: "ঢাকার মধ্যে",
+                    area1Fee: "60",
+                    area1Time: "১-২ দিন",
+                    area2Name: "ঢাকার বাইরে",
+                    area2Fee: "120",
+                    area2Time: "৩-৫ কার্যদিবস",
                     codFeeInfo: "30",
                     address: "সুজানগর বাজার, পাবনা",
                     status: "active",
@@ -531,7 +560,6 @@
     <script>
         let activeZoomImages = [];
 
-        // ছবি কম্প্রেশন ফাংশন (ডাটাবেজ পাতলা রাখার জন্য কিন্তু ছবি পরিষ্কার রাখার জন্য)
         function compressImageFile(file, callback, maxWidth = 900, maxHeight = 900, quality = 0.75) {
             const reader = new FileReader();
             reader.onload = function(event) {
@@ -1021,7 +1049,21 @@
                     db.cart.forEach(item => {
                         if (!grouped[item.vendorId]) {
                             const v = db.vendors[item.vendorId] || {};
-                            grouped[item.vendorId] = { shopName: item.shopName, bkash: item.bkash, isFreeDelivery: v.isFreeDelivery, deliveryFeeInfo: v.deliveryFeeInfo || '', codFeeInfo: v.codFeeInfo || '', items: [], subtotal: 0 };
+                            grouped[item.vendorId] = { 
+                                shopName: item.shopName, 
+                                bkash: v.bkash || '', 
+                                nagad: v.nagad || '',
+                                isFreeDelivery: v.isFreeDelivery, 
+                                area1Name: v.area1Name || 'ঢাকার মধ্যে', 
+                                area1Fee: v.area1Fee || '60', 
+                                area1Time: v.area1Time || '১-২ দিন',
+                                area2Name: v.area2Name || 'ঢাকার বাইরে', 
+                                area2Fee: v.area2Fee || '120', 
+                                area2Time: v.area2Time || '৩-৫ কার্যদিবস',
+                                codFeeInfo: v.codFeeInfo || '', 
+                                items: [], 
+                                subtotal: 0 
+                            };
                         }
                         grouped[item.vendorId].items.push(item);
                         grouped[item.vendorId].subtotal += item.price * item.qty;
@@ -1054,7 +1096,7 @@
                                 <div style="background:#fce4ec; color:#880e4f; padding:6px 10px; border-radius:6px; font-weight:bold; font-size:13px; margin-bottom:8px;">🏪 দোকানের নাম: ${group.shopName}</div>
                                 ${itemsHTML}
                                 <div style="font-size:11px; color:#555; margin:6px 0; background:#f8fafc; padding:6px; border-radius:6px;">
-                                    <b>ডেলিভারি পলিসি:</b> ${group.isFreeDelivery ? '<span style="color:#16a34a; font-weight:bold;">ফ্রি ডেলিভারি</span>' : (group.deliveryFeeInfo ? `ডেলিভারি চার্জ: ৳${group.deliveryFeeInfo}` : 'স্ট্যান্ডার্ড')} ${group.codFeeInfo ? `| ক্যাশ অন ডেলিভারি অতিরিক্ত চার্জ: ৳${group.codFeeInfo}` : ''}
+                                    <b>ডেলিভারি পলিসি:</b> ${group.isFreeDelivery ? '<span style="color:#16a34a; font-weight:bold;">ফ্রি ডেলিভারি</span>' : `${group.area1Name}: ৳${group.area1Fee} (${group.area1Time}) | ${group.area2Name}: ৳${group.area2Fee} (${group.area2Time})`} ${group.codFeeInfo ? `| COD চার্জ: ৳${group.codFeeInfo}` : ''}
                                 </div>
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
                                     <span style="font-weight:bold;">সাবটোটাল: ৳${group.subtotal}</span>
@@ -1111,13 +1153,13 @@
                                 <div class="pin-box">🔐 পিন কোড: ${ord.pin}</div>
                                 <div style="margin:6px 0;">${itemsHTML}</div>
                                 <div style="font-size:12px; color:#333; margin-top:6px;">
-                                    প্রোডাক্ট মূল্য: ৳${ord.productTotal || ord.total} + ডেলিভারি চার্জ: ৳${ord.deliveryFee || 0} ${ord.codFee ? `+ COD চার্জ: ৳${ord.codFee}` : ''}<br>
+                                    প্রোডাক্ট মূল্য: ৳${ord.productTotal || ord.total} + ডেলিভারি চার্জ (${ord.selectedArea || 'স্ট্যান্ডার্ড'}): ৳${ord.deliveryFee || 0} ${ord.codFee ? `+ COD চার্জ: ৳${ord.codFee}` : ''}<br>
                                     <b>সর্বমোট বিল:</b> ৳${ord.total} (${ord.paymentMethod})
                                 </div>
-                                <div style="font-size:11px; color:#555; margin-top:4px;">👤 জিমেইল: ${ord.customer.gmail}</div>
+                                <div style="font-size:11px; color:#555; margin-top:4px;">👤 জিমেইল: ${ord.customer.gmail} | জেলা: ${ord.customer.district || 'N/A'}</div>
                                 ${notifHTML}
                                 ${cancelBtnHTML}
-                                <div class="delivery-note" style="margin-top:6px;">🚚 ৫ দিনের মধ্যে ডেলিভারি সম্পন্ন হবে।</div>
+                                <div class="delivery-note" style="margin-top:6px;">🚚 ডেলিভারির সময়সীমা: ${ord.deliveryTimeText || '৫ দিনের মধ্যে'}</div>
                             </div>
                         `;
                     }).join('');
@@ -1156,28 +1198,61 @@
             const vendor = db.vendors[vendorId];
             const shopItems = db.cart.filter(c => c.vendorId === vendorId);
             const productTotal = shopItems.reduce((sum, i) => sum + (i.price * i.qty), 0);
-            const paymentNumber = vendor.bkash || '01700000000';
-
+            
             const body = document.getElementById('checkout-modal-body');
             if (body) {
                 if (!db.customerUser) {
                     body.innerHTML = `
-                        <h3 style="color:var(--primary-pink); margin-bottom:6px;">🔐 জিমেইল দিয়ে সাইন ইন (প্রথমবার মাত্র)</h3>
-                        <p style="font-size:12px; color:#666; margin-bottom:12px;">যেকোনো দোকান থেকে অর্ডার করতে আপনার জিমেইল দিয়ে একবার সাইন ইন করুন।</p>
-                        <div class="form-group"><label>আপনার জিমেইল (Gmail)</label><input type="email" id="cust-login-gmail" placeholder="example@gmail.com"></div>
-                        <div class="form-group"><label>আপনার নাম</label><input type="text" id="cust-login-name" placeholder="পূর্ণ নাম"></div>
-                        <div class="form-group"><label>মোবাইল নম্বর</label><input type="text" id="cust-login-phone" placeholder="017xxxxxxxx"></div>
-                        <div class="form-group"><label>ঠিকানা</label><textarea id="cust-login-address" placeholder="পূর্ণ ঠিকানা"></textarea></div>
-                        <button class="btn-pink" style="padding:12px; font-size:14px;" onclick="saveCustomerLogin('${vendorId}')">সাইন ইন করুন ও পেমেন্টে যান</button>
+                        <h3 style="color:var(--primary-pink); margin-bottom:6px;">👤 কাস্টমার প্রোফাইল সেটআপ (প্রথমবার মাত্র)</h3>
+                        <p style="font-size:12px; color:#666; margin-bottom:12px;">আপনার নাম, ফোন, জিমেইল, জেলা ও ঠিকানা দিন। এটি সারাজীবনের জন্য সেভ থাকবে।</p>
+                        <div class="form-group"><label>আপনার নাম *</label><input type="text" id="cust-login-name" placeholder="পূর্ণ নাম"></div>
+                        <div class="form-group"><label>মোবাইল নম্বর *</label><input type="text" id="cust-login-phone" placeholder="017xxxxxxxx"></div>
+                        <div class="form-group"><label>জিমেইল (Gmail) *</label><input type="email" id="cust-login-gmail" placeholder="example@gmail.com"></div>
+                        <div class="form-group">
+                            <label>জেলা (District) *</label>
+                            <select id="cust-login-district" style="width:100%; padding:9px; border:1px solid #d1d5db; border-radius:8px; background:white; font-weight:bold;">
+                                <option value="পাবনা">পাবনা</option>
+                                <option value="ঢাকা">ঢাকা</option>
+                                <option value="রাজশাহী">রাজশাহী</option>
+                                <option value="বগুড়া">বগুড়া</option>
+                                <option value="সিরাজগঞ্জ">সিরাজগঞ্জ</option>
+                                <option value="অন্যান্য জেলা">অন্যান্য জেলা</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>বিস্তারিত ঠিকানা (রোড, মহল্লা, বাজার) *</label><textarea id="cust-login-address" placeholder="বিস্তারিত ঠিকানা লিখুন"></textarea></div>
+                        <button class="btn-pink" style="padding:12px; font-size:14px;" onclick="saveCustomerLogin('${vendorId}')">তথ্য সেভ করুন ও পেমেন্টে যান</button>
                     `;
                 } else {
+                    const u = db.customerUser;
+                    const area1Name = vendor.area1Name || 'ঢাকার মধ্যে';
+                    const area2Name = vendor.area2Name || 'ঢাকার বাইরে';
+
                     body.innerHTML = `
                         <h3 style="color:var(--primary-pink); margin-bottom:6px;">🧾 অর্ডার স্লিপ ও পেমেন্ট</h3>
-                        <div style="background:#e0f2fe; color:#0369a1; padding:6px 10px; border-radius:6px; font-size:11px; font-weight:bold; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                            <span>👤 জিমেইল সাইন-ইন করা আছে: ${db.customerUser.gmail}</span>
-                            <span style="color:#dc2626; cursor:pointer; text-decoration:underline;" onclick="logoutCustomerUser('${vendorId}')">লগআউট</span>
+                        
+                        <div style="background:#f8fafc; padding:8px; border-radius:8px; margin-bottom:10px; font-size:12px; border:1px solid #e2e8f0; position:relative;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                <b>👤 কাস্টমার তথ্য:</b>
+                                <span style="color:#2563eb; cursor:pointer; font-weight:bold; text-decoration:underline;" onclick="editCustomerProfile('${vendorId}')">✏️ এডিট (Edit)</span>
+                            </div>
+                            নাম: ${u.name}<br>
+                            ফোন: ${u.phone}<br>
+                            জিমেইল: ${u.gmail}<br>
+                            জেলা: ${u.district || 'N/A'}<br>
+                            ঠিকানা: ${u.address}
                         </div>
+
                         <div style="background:#fce4ec; padding:8px; border-radius:6px; font-weight:bold; font-size:13px; margin-bottom:10px;">🏪 দোকান: ${vendor.shopName}</div>
+                        
+                        <div style="background:#f1f5f9; padding:8px; border-radius:8px; margin-bottom:10px; border:1px solid #cbd5e1;">
+                            <label style="font-size:12px; font-weight:bold; color:#1e293b; display:block; margin-bottom:4px;">🚚 ডেলিভারি এলাকা নির্বাচন করুন:</label>
+                            <select id="chk-delivery-area" onchange="updateCheckoutTotal('${vendorId}')" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; font-weight:bold; background:white;">
+                                <option value="area1">${area1Name} (চার্জ: ৳${vendor.area1Fee || 60} | সময়: ${vendor.area1Time || '১-২ দিন'})</option>
+                                <option value="area2">${area2Name} (চার্জ: ৳${vendor.area2Fee || 120} | সময়: ${vendor.area2Time || '৩-৫ কার্যদিবস'})</option>
+                            </select>
+                            <p id="chk-delivery-time-note" style="font-size:11px; color:#166534; font-weight:bold; margin-top:5px;">⏱️ আনুমানিক ডেলিভারি সময়: ${vendor.area1Time || '১-২ দিন'}</p>
+                        </div>
+
                         <div style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:8px;">
                             ${shopItems.map(i => `<div style="font-size:12px; margin-bottom:4px;">• ${i.name} (${i.variants || 'Standard'}) - ${i.qty} পিস - <b>৳${i.price * i.qty}</b></div>`).join('')}
                             
@@ -1187,7 +1262,7 @@
                             </div>
                             <div style="font-size:12px; color:#555; margin-top:4px; display:flex; justify-content:space-between;">
                                 <span>ডেলিভারি চার্জ:</span>
-                                <b id="chk-delivery-fee">৳0</b>
+                                <b id="chk-delivery-fee">৳${vendor.area1Fee || 60}</b>
                             </div>
                             <div id="chk-cod-row" style="font-size:12px; color:#b45309; margin-top:4px; display:none; justify-content:space-between;">
                                 <span>ক্যাশ অন ডেলিভারি অতিরিক্ত চার্জ:</span>
@@ -1195,24 +1270,19 @@
                             </div>
                             <div style="font-size:15px; font-weight:bold; color:var(--primary-pink); margin-top:6px; display:flex; justify-content:space-between; border-top:1px dashed #cbd5e1; padding-top:4px;">
                                 <span>সর্বমোট বিল (Total):</span>
-                                <span id="chk-total-bill">৳${productTotal}</span>
+                                <span id="chk-total-bill">৳${productTotal + parseInt(vendor.area1Fee || 60)}</span>
                             </div>
                         </div>
-                        <div style="background:#f8fafc; padding:8px; border-radius:8px; margin-bottom:10px; font-size:12px; border:1px solid #e2e8f0;">
-                            <b>ডেলিভারির তথ্য:</b><br>
-                            নাম: ${db.customerUser.name}<br>
-                            ফোন: ${db.customerUser.phone}<br>
-                            ঠিকানা: ${db.customerUser.address}
-                        </div>
+
                         <div style="background:#f8fafc; padding:10px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:10px;">
                             <label style="font-size:12px; font-weight:bold;">💳 পেমেন্ট পদ্ধতি নির্বাচন করুন:</label>
                             <select id="chk-pay-method" onchange="updateCheckoutTotal('${vendorId}')" style="width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #ccc;">
-                                <option value="বিকাশ">বিকাশ (Personal): ${paymentNumber}</option>
-                                <option value="নগদ">নগদ (Personal): ${paymentNumber}</option>
+                                <option value="বিকাশ">বিকাশ (Personal): ${vendor.bkash || '017xxxxxxxx'}</option>
+                                <option value="নগদ">নগদ (Personal): ${vendor.nagad || '018xxxxxxxx'}</option>
                                 <option value="ক্যাশ অন ডেলিভারি">ক্যাশ অন ডেলিভারি (Cash on Delivery)</option>
                             </select>
                             <div id="chk-trx-box" style="margin-top:8px;">
-                                <label style="font-size:11px; font-weight:bold; color:#b45309; margin-bottom:3px; display:block;">⚠️ টাকা পাঠিয়ে ট্রানজেকশন আইডি (TrxID) দিন:</label>
+                                <label style="font-size:11px; font-weight:bold; color:#b45309; margin-bottom:3px; display:block;">⚠️ টাকা পাঠিয়ে ট্রানজেকশন আইডি (TrxID) দিন *:</label>
                                 <input type="text" id="chk-trx" placeholder="যেমন: 9H78K2L1M9" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; font-weight:bold;">
                             </div>
                         </div>
@@ -1224,16 +1294,76 @@
             document.getElementById('checkout-modal').style.display = 'flex';
         }
 
+        function editCustomerProfile(vendorId) {
+            const u = db.customerUser || {};
+            const body = document.getElementById('checkout-modal-body');
+            if (!body) return;
+
+            body.innerHTML = `
+                <h3 style="color:var(--primary-pink); margin-bottom:6px;">✏️ কাস্টমার তথ্য এডিট করুন</h3>
+                <p style="font-size:12px; color:#666; margin-bottom:12px;">আপনার নাম, ফোন, জিমেইল, জেলা বা ঠিকানা পরিবর্তন করে সেভ করুন।</p>
+                <div class="form-group"><label>আপনার নাম *</label><input type="text" id="edit-cust-name" value="${u.name || ''}"></div>
+                <div class="form-group"><label>মোবাইল নম্বর *</label><input type="text" id="edit-cust-phone" value="${u.phone || ''}"></div>
+                <div class="form-group"><label>জিমেইল (Gmail) *</label><input type="email" id="edit-cust-gmail" value="${u.gmail || ''}"></div>
+                <div class="form-group">
+                    <label>জেলা (District) *</label>
+                    <select id="edit-cust-district" style="width:100%; padding:9px; border:1px solid #d1d5db; border-radius:8px; background:white; font-weight:bold;">
+                        <option value="পাবনা" ${u.district === 'পাবনা' ? 'selected' : ''}>পাবনা</option>
+                        <option value="ঢাকা" ${u.district === 'ঢাকা' ? 'selected' : ''}>ঢাকা</option>
+                        <option value="রাজশাহী" ${u.district === 'রাজশাহী' ? 'selected' : ''}>রাজশাহী</option>
+                        <option value="বগুড়া" ${u.district === 'বগুড়া' ? 'selected' : ''}>বগুড়া</option>
+                        <option value="সিরাজগঞ্জ" ${u.district === 'সিরাজগঞ্জ' ? 'selected' : ''}>সিরাজগঞ্জ</option>
+                        <option value="অন্যান্য জেলা" ${u.district === 'অন্যান্য জেলা' ? 'selected' : ''}>অন্যান্য জেলা</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>বিস্তারিত ঠিকানা *</label><textarea id="edit-cust-address">${u.address || ''}</textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn-action btn-green" style="flex:1; padding:10px;" onclick="saveEditedCustomerProfile('${vendorId}')">পরিবর্তন সেভ করুন</button>
+                    <button class="btn-action btn-blue" style="padding:10px;" onclick="openShopCheckout('${vendorId}')">বাতিল</button>
+                </div>
+            `;
+        }
+
+        function saveEditedCustomerProfile(vendorId) {
+            const name = document.getElementById('edit-cust-name').value.trim();
+            const phone = document.getElementById('edit-cust-phone').value.trim();
+            const gmail = document.getElementById('edit-cust-gmail').value.trim().toLowerCase();
+            const district = document.getElementById('edit-cust-district').value;
+            const address = document.getElementById('edit-cust-address').value.trim();
+
+            if (!name || !phone || !address || !gmail) {
+                alert('❌ দয়া করে নাম, ফোন, জিমেইল এবং ঠিকানা সবগুলো তথ্য সঠিকভাবে পূরণ করুন!');
+                return;
+            }
+
+            db.customerUser = { name, phone, gmail, district, address };
+            saveToStorage();
+            alert('✅ কাস্টমার তথ্য সফলভাবে আপডেট করা হয়েছে!');
+            openShopCheckout(vendorId);
+        }
+
         function updateCheckoutTotal(vendorId) {
             const vendor = db.vendors[vendorId];
             const shopItems = db.cart.filter(c => c.vendorId === vendorId);
             const productTotal = shopItems.reduce((sum, i) => sum + (i.price * i.qty), 0);
 
+            const areaSelect = document.getElementById('chk-delivery-area');
+            const selectedAreaVal = areaSelect ? areaSelect.value : 'area1';
+            
             let deliveryFee = 0;
-            if (!vendor.isFreeDelivery && vendor.deliveryFeeInfo) {
-                const match = vendor.deliveryFeeInfo.match(/\d+/);
-                if (match) deliveryFee = parseInt(match[0]) || 0;
+            let timeText = '১-২ দিন';
+            if (!vendor.isFreeDelivery) {
+                if (selectedAreaVal === 'area2') {
+                    deliveryFee = parseInt(vendor.area2Fee || 120);
+                    timeText = vendor.area2Time || '৩-৫ কার্যদিবস';
+                } else {
+                    deliveryFee = parseInt(vendor.area1Fee || 60);
+                    timeText = vendor.area1Time || '১-২ দিন';
+                }
             }
+
+            const timeNoteEl = document.getElementById('chk-delivery-time-note');
+            if (timeNoteEl) timeNoteEl.innerText = `⏱️ আনুমানিক ডেলিভারি সময়: ${timeText}`;
 
             const method = document.getElementById('chk-pay-method').value;
             const trxBox = document.getElementById('chk-trx-box');
@@ -1261,29 +1391,25 @@
         }
 
         function saveCustomerLogin(vendorId) {
-            const gmail = document.getElementById('cust-login-gmail').value.trim().toLowerCase();
             const name = document.getElementById('cust-login-name').value.trim();
             const phone = document.getElementById('cust-login-phone').value.trim();
+            const gmail = document.getElementById('cust-login-gmail').value.trim().toLowerCase();
+            const district = document.getElementById('cust-login-district').value;
             const address = document.getElementById('cust-login-address').value.trim();
 
-            if (!gmail || !name || !phone || !address) { alert('দয়া করে জিমেইল, নাম, মোবাইল নম্বর এবং ঠিকানা দিন!'); return; }
+            if (!name) { alert('❌ দয়া করে আপনার নাম লিখুন!'); document.getElementById('cust-login-name').focus(); return; }
+            if (!phone) { alert('❌ দয়া করে আপনার মোবাইল নম্বর লিখুন!'); document.getElementById('cust-login-phone').focus(); return; }
+            if (!gmail) { alert('❌ দয়া করে আপনার জিমেইল আইডি লিখুন!'); document.getElementById('cust-login-gmail').focus(); return; }
+            if (!address) { alert('❌ দয়া করে আপনার বিস্তারিত ঠিকানা লিখুন!'); document.getElementById('cust-login-address').focus(); return; }
 
-            db.customerUser = { gmail, name, phone, address };
+            db.customerUser = { name, phone, gmail, district, address };
             saveToStorage();
-            alert('✅ সফলভাবে জিমেইল দিয়ে সাইন ইন করা হয়েছে!');
+            alert('✅ সফলভাবে কাস্টমার প্রোফাইল সেভ করা হয়েছে!');
             openShopCheckout(vendorId);
         }
 
-        function logoutCustomerUser(vendorId) {
-            if (confirm('আপনি কি সাইন আউট করতে চান?')) {
-                db.customerUser = null;
-                saveToStorage();
-                openShopCheckout(vendorId);
-            }
-        }
-
         function finalizeShopOrder(vendorId) {
-            if (!db.customerUser) { alert('দয়া করে প্রথমে জিমেইল দিয়ে সাইন ইন করুন!'); openShopCheckout(vendorId); return; }
+            if (!db.customerUser) { alert('দয়া করে প্রথমে তথ্য পূরণ করুন!'); openShopCheckout(vendorId); return; }
 
             const paymentMethod = document.getElementById('chk-pay-method').value;
             let trxId = 'COD (ক্যাশ অন ডেলিভারি)';
@@ -1292,7 +1418,7 @@
                 const trxInput = document.getElementById('chk-trx');
                 trxId = trxInput ? trxInput.value.trim() : '';
                 if (!trxId) {
-                    alert('❌ পেমেন্ট করার পর অবশ্যই সঠিক TrxID (ট্রানজেকশন আইডি) দিতে হবে!');
+                    alert('❌ ভুল বা খালি তথ্য! পেমেন্ট করার পর অবশ্যই সঠিক TrxID (ট্রানজেকশন আইডি) দিতে হবে!');
                     if (trxInput) trxInput.focus();
                     return;
                 }
@@ -1302,10 +1428,14 @@
             const shopItems = db.cart.filter(c => c.vendorId === vendorId);
             const productTotal = shopItems.reduce((sum, i) => sum + (i.price * i.qty), 0);
             
+            const areaSelect = document.getElementById('chk-delivery-area');
+            const selectedAreaVal = areaSelect ? areaSelect.value : 'area1';
+            const selectedAreaName = selectedAreaVal === 'area2' ? (vendor.area2Name || 'ঢাকার বাইরে') : (vendor.area1Name || 'ঢাকার মধ্যে');
+            const deliveryTimeText = selectedAreaVal === 'area2' ? (vendor.area2Time || '৩-৫ কার্যদিবস') : (vendor.area1Time || '১-২ দিন');
+
             let deliveryFee = 0;
-            if (!vendor.isFreeDelivery && vendor.deliveryFeeInfo) {
-                const match = vendor.deliveryFeeInfo.match(/\d+/);
-                if (match) deliveryFee = parseInt(match[0]) || 0;
+            if (!vendor.isFreeDelivery) {
+                deliveryFee = selectedAreaVal === 'area2' ? parseInt(vendor.area2Fee || 120) : parseInt(vendor.area1Fee || 60);
             }
 
             let codFee = 0;
@@ -1320,8 +1450,9 @@
 
             db.orders.unshift({
                 orderId, vendorId, shopName: vendor.shopName, items: shopItems, productTotal, deliveryFee, codFee, total, paymentMethod, trxId, pin,
+                selectedArea: selectedAreaName, deliveryTimeText,
                 status: 'pending', 
-                notifications: [`অর্ডার #${orderId} সফলভাবে প্লেস হয়েছে। (Pending)`],
+                notifications: [`অর্ডার #${orderId} সফলভাবে প্লেস হয়েছে। (${selectedAreaName})`],
                 customer: db.customerUser
             });
             db.cart = db.cart.filter(c => c.vendorId !== vendorId);
@@ -1345,19 +1476,22 @@
             const backInput = document.getElementById('reg-nid-back');
 
             if (!shopName || !ownerName || !nid || !gmail || !password || !phone) {
-                alert('দয়া করে নাম, ফোন, জিমেইল, পাসওয়ার্ড এবং এনআইডি নম্বর পূরণ করুন!');
+                alert('❌ দয়া করে দোকানের নাম, মালিকের নাম, জিমেইল, পাসওয়ার্ড এবং ফোন নম্বর পূরণ করুন!');
                 return;
             }
 
             const existingGmail = Object.values(db.vendors).find(v => v.gmail === gmail);
-            if (existingGmail) { alert('এই জিমেইল দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রয়েছে!'); return; }
+            if (existingGmail) { alert('❌ এই জিমেইল দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রয়েছে!'); return; }
 
             const processRegistration = (frontImg = '', backImg = '') => {
                 const newId = 'V-' + Math.floor(103 + Math.random() * 890);
                 
                 db.vendors[newId] = {
                     id: newId, shopName, ownerName, nid, gmail, password, phone, address,
-                    bkash: '', isFreeDelivery: false, deliveryFeeInfo: '50', codFeeInfo: '30',
+                    bkash: '', nagad: '', isFreeDelivery: false, 
+                    area1Name: 'ঢাকার মধ্যে', area1Fee: '60', area1Time: '১-২ দিন',
+                    area2Name: 'ঢাকার বাইরে', area2Fee: '120', area2Time: '৩-৫ কার্যদিবস',
+                    codFeeInfo: '30',
                     status: 'pending', nidFront: frontImg, nidBack: backImg, products: []
                 };
 
@@ -1393,7 +1527,7 @@
             const gmail = document.getElementById('modal-login-gmail').value.trim().toLowerCase();
             const password = document.getElementById('modal-login-password').value.trim();
 
-            if (!gmail || !password) { alert('জিমেইল এবং পাসওয়ার্ড দিন!'); return; }
+            if (!gmail || !password) { alert('❌ জিমেইল এবং পাসওয়ার্ড দিন!'); return; }
 
             const vendor = Object.values(db.vendors).find(v => v.gmail === gmail && v.password === password);
             if (!vendor) { alert('❌ জিমেইল অথবা পাসওয়ার্ড ভুল হয়েছে!'); return; }
@@ -1445,8 +1579,17 @@
 
             document.getElementById('v-panel-shop-id').innerText = `দোকান: ${vendor.shopName} | আইডি: ${vendor.id} | জিমেইল: ${vendor.gmail}`;
             document.getElementById('edit-vendor-bkash').value = vendor.bkash || '';
+            document.getElementById('edit-vendor-nagad').value = vendor.nagad || '';
             document.getElementById('edit-vendor-free').checked = vendor.isFreeDelivery || false;
-            document.getElementById('edit-vendor-delivery-fee').value = vendor.deliveryFeeInfo || '';
+            
+            document.getElementById('edit-area1-name').value = vendor.area1Name || 'ঢাকার মধ্যে';
+            document.getElementById('edit-area1-fee').value = vendor.area1Fee || '60';
+            document.getElementById('edit-area1-time').value = vendor.area1Time || '১-২ দিন';
+
+            document.getElementById('edit-area2-name').value = vendor.area2Name || 'ঢাকার বাইরে';
+            document.getElementById('edit-area2-fee').value = vendor.area2Fee || '120';
+            document.getElementById('edit-area2-time').value = vendor.area2Time || '৩-৫ কার্যদিবস';
+
             document.getElementById('edit-vendor-cod-fee').value = vendor.codFeeInfo || '';
             toggleVendorDeliveryMode();
 
@@ -1466,11 +1609,22 @@
         function updateVendorDeliverySettings() {
             if (!db.activeVendorId || !db.vendors[db.activeVendorId]) return;
             const vendor = db.vendors[db.activeVendorId];
+            
+            vendor.bkash = document.getElementById('edit-vendor-bkash').value.trim();
+            vendor.nagad = document.getElementById('edit-vendor-nagad').value.trim();
             vendor.isFreeDelivery = document.getElementById('edit-vendor-free').checked;
-            vendor.deliveryFeeInfo = document.getElementById('edit-vendor-delivery-fee').value.trim();
+            
+            vendor.area1Name = document.getElementById('edit-area1-name').value.trim() || 'ঢাকার মধ্যে';
+            vendor.area1Fee = document.getElementById('edit-area1-fee').value.trim() || '60';
+            vendor.area1Time = document.getElementById('edit-area1-time').value.trim() || '১-২ দিন';
+
+            vendor.area2Name = document.getElementById('edit-area2-name').value.trim() || 'ঢাকার বাইরে';
+            vendor.area2Fee = document.getElementById('edit-area2-fee').value.trim() || '120';
+            vendor.area2Time = document.getElementById('edit-area2-time').value.trim() || '৩-৫ কার্যদিবস';
+
             vendor.codFeeInfo = document.getElementById('edit-vendor-cod-fee').value.trim();
             saveToStorage();
-            alert('✅ আপনার ডেলিভারি ও ক্যাশ অন ডেলিভারি চার্জ সেটিংস সফলভাবে সেভ হয়েছে!');
+            alert('✅ আপনার দোকান, পেমেন্ট ও ডেলিভারি সেটিংস সফলভাবে সেভ হয়েছে!');
         }
 
         function switchVendorSubTab(tabId, el) {
@@ -1514,7 +1668,7 @@
             const stock = parseInt(document.getElementById('vp-stock').value) || 10;
             const filesInput = document.getElementById('vp-images');
 
-            if (!name || isNaN(price)) { alert('সঠিক নাম ও দাম দিন!'); return; }
+            if (!name || isNaN(price)) { alert('❌ সঠিক নাম ও দাম দিন!'); return; }
 
             const pushProduct = (imgList) => {
                 vendor.products.unshift({
@@ -1544,18 +1698,9 @@
             } else { pushProduct(['🛍️', '✨']); }
         }
 
-        function updateVendorBkash() {
-            const bkashInput = document.getElementById('edit-vendor-bkash');
-            if (bkashInput && db.activeVendorId && db.vendors[db.activeVendorId]) {
-                db.vendors[db.activeVendorId].bkash = bkashInput.value.trim();
-                saveToStorage();
-                alert('✅ বিকাশ/নগদ নম্বর সেভ হয়েছে!');
-            }
-        }
-
         function updateVendorPassword() {
             const newPass = document.getElementById('edit-vendor-pass').value.trim();
-            if (!newPass) { alert('নতুন পাসওয়ার্ড লিখুন!'); return; }
+            if (!newPass) { alert('❌ নতুন পাসওয়ার্ড লিখুন!'); return; }
             if (db.activeVendorId && db.vendors[db.activeVendorId]) {
                 db.vendors[db.activeVendorId].password = newPass;
                 saveToStorage();
@@ -1632,7 +1777,7 @@
             const stock = parseInt(document.getElementById('edit-prod-stock').value) || p.stock;
             const filesInput = document.getElementById('edit-prod-images');
 
-            if (!name || isNaN(price)) { alert('সঠিক নাম ও দাম দিন!'); return; }
+            if (!name || isNaN(price)) { alert('❌ সঠিক নাম ও দাম দিন!'); return; }
 
             const updateFields = (imgList) => {
                 p.type = type; p.name = name; p.barcode = barcode; p.price = price;
@@ -1737,7 +1882,7 @@
                             <div>
                                 <b style="font-size:14px; color:#1e293b;">👤 ${ord.customer.name}</b><br>
                                 <a href="tel:${ord.customer.phone}" style="font-size:12px; color:#2563eb; text-decoration:none;">📞 ${ord.customer.phone}</a><br>
-                                <small style="color:#555;">📧 জিমেইল: ${ord.customer.gmail}</small>
+                                <small style="color:#555;">📧 জিমেইল: ${ord.customer.gmail} | জেলা: ${ord.customer.district || 'N/A'}</small>
                             </div>
                             <span style="background:#fef3c7; color:#b45309; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:bold;">${ord.status}</span>
                         </div>
@@ -1748,6 +1893,7 @@
                         <div style="font-size:12px; color:#334155; background:#f8fafc; padding:8px; border-radius:6px; margin-bottom:8px; line-height:1.5;">
                             <b>🛍️ অর্ডারের বিবরণী:</b><br>${itemsDesc}<br>
                             <b>📍 ঠিকানা:</b> ${ord.customer.address}<br>
+                            <b>🚚 ডেলিভারি এলাকা:</b> <span style="color:#16a34a; font-weight:bold;">${ord.selectedArea || 'স্ট্যান্ডার্ড'} (${ord.deliveryTimeText || 'N/A'})</span><br>
                             <b>💳 পেমেন্ট পদ্ধতি:</b> <span style="color:#0284c7; font-weight:bold;">${ord.paymentMethod}</span><br>
                             <b>🔑 TrxID (পেমেন্ট কোড):</b> <span style="background:#fef08a; padding:2px 6px; border-radius:4px; font-weight:bold; color:#854d0e;">${ord.trxId}</span><br>
                             <div class="pin-box" style="margin:4px 0;">🔐 গোপন ডেলিভারি কোড: ${ord.pin}</div> (অর্ডার #${ord.orderId})
@@ -1874,7 +2020,7 @@
                 const key = o.customer.gmail || o.customer.phone;
                 if (!customerMap[key]) {
                     customerMap[key] = {
-                        name: o.customer.name, phone: o.customer.phone, gmail: o.customer.gmail, address: o.customer.address, orders: []
+                        name: o.customer.name, phone: o.customer.phone, gmail: o.customer.gmail, district: o.customer.district, address: o.customer.address, orders: []
                     };
                 }
                 customerMap[key].orders.push(o);
@@ -1895,7 +2041,7 @@
                             <b>👤 ${c.name}</b>
                             <span style="font-size:11px; background:#fce4ec; color:var(--primary-pink); padding:2px 6px; font-weight:bold; border-radius:4px;">অর্ডার: ${totalOrders}টি</span>
                         </div>
-                        <div style="font-size:11px; color:#555; margin-top:4px;">📞 ${c.phone} | 📍 ${c.address}</div>
+                        <div style="font-size:11px; color:#555; margin-top:4px;">📞 ${c.phone} | জেলা: ${c.district || 'N/A'} | 📍 ${c.address}</div>
                         <small style="color:#2563eb; display:block; margin-top:4px;">👉 বিস্তারিত দেখতে এখানে ক্লিক করুন...</small>
                     </div>
                 `;
@@ -1925,6 +2071,7 @@
                     <b>👤 কাস্টমারের নাম:</b> ${c.name}<br>
                     <b>📧 জিমেইল আইডি:</b> ${c.gmail || 'N/A'}<br>
                     <b>📞 মোবাইল নম্বর:</b> ${c.phone}<br>
+                    <b>📍 জেলা:</b> ${c.district || 'N/A'}<br>
                     <b>📍 ঠিকানা:</b> ${c.address}<br>
                     <b>📦 মোট অর্ডার সংখ্যা:</b> ${totalOrders}টি<br>
                     <b>❌ ক্যানসেল করা অর্ডার:</b> ${cancelledOrders}টি
