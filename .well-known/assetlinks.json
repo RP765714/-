@@ -1,0 +1,31 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.funplay.arcade",
+      "sha256_cert_fingerprints": [
+        "CF:DE:81:EB:62:FC:06:8C:33:F7:D6:68:9D:8D:14:08:F9:B2:FD:31:C8:84:06:B2:9E:58:DC:80:97:5A:F0:47",
+        "8F:C0:4D:35:95:A6:28:2E:EC:E4:9B:27:3A:33:C7:45:DA:E6:BC:8F:E3:D2:EF:36:79:33:F6:22:E3:B2:F8:F5",
+        "B9:9E:8A:60:79:2B:5B:6F:1C:62:E4:AC:07:DD:A2:BD:56:91:FA:E1:42:17:DE:BB:C5:63:D1:37:B5:37:64:1A"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.jela64onlineshop.app",
+      "sha256_cert_fingerprints": [
+        "77:8E:4B:B7:19:E4:59:06:EE:52:C5:87:2A:F6:4C:B9:14:CE:66:BD:7C:8E:1B:2D:65:5E:AC:92:9B:9A:AB:79",
+        "6D:21:29:15:3B:CD:0A:02:95:C8:50:5E:ED:B2:DC:7C:78:60:7D:E2:0A:B1:27:A1:11:CA:2E:1B:13:3B:F0:95",
+        "E6:BD:0D:3B:EE:0C:2F:D5:8B:47:03:BA:9A:87:8D:12:D6:91:E3:CB:AF:CC:4E:07:C9:61:BA:86:2B:63:68:46"
+      ]
+    }
+  }
+]
